@@ -28,7 +28,7 @@ public class StandingTile
 
     public StandingTile(bool isHome, Color color, Point drawingPos)
     {
-        PassedFigurines = new List<int>(){11,12,13,14};
+        PassedFigurines = new List<int>();
         Color = color;
         IsHome = isHome;
         Brush = new SolidBrush(color);
