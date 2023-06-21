@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net7.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWindowsForms>true</UseWindowsForms>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyName>CloveceNezlobSe</AssemblyName>
+        <RootNamespace>CloveceNezlobSe</RootNamespace>
+        <Authors>CloveceNezlobSe</Authors>
+        <Company>CloveceNezlobSe</Company>
+        <Product>CloveceNezlobSe</Product>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Update="ActionForm.cs">
+        <SubType>Form</SubType>
+      </Compile>
+    </ItemGroup>
+
+</Project>
