@@ -5,7 +5,7 @@ public class ThrowsManager
     private List<Home> _homes;
     private List<Finish> _finishes;
     private StandingTile[] _map;
-    public static Color[] PlaysOrder = { Color.Yellow, Color.Green, Color.Blue, Color.Red };
+    public static Color[] PlaysOrder = { Color.Yellow, Color.Red, Color.Blue, Color.Green };
     public List<int>[] DeployedFigurines;
     public int ActualPlayerId = 0;
     private int ActualThrow = 0;
@@ -30,6 +30,7 @@ public class ThrowsManager
 
     public void MakeAction(int throwNumber)
     {
+        throwNumber = 6;
         ActualThrow = throwNumber;
         var actionsDialog = new ActionForm();
         actionsDialog.OnActionChosed += OnActionChosed;
@@ -39,14 +40,14 @@ public class ThrowsManager
             throwNumber == 6);
         actionsDialog.Show();
         LastPlayerId = ActualPlayerId;
-        if (ActualPlayerId < 3)
-        {
-            ActualPlayerId++;
-        }
-        else
-        {
-            ActualPlayerId = 0;
-        }
+        // if (ActualPlayerId < 3 )
+        // {
+        //     ActualPlayerId++;
+        // }
+        // else
+        // {
+        //     ActualPlayerId = 0;
+        // }
     }
 
     private void OnActionChosed(Actions action)
@@ -79,7 +80,7 @@ public class ThrowsManager
     {
         var home = _homes.Find(x => x.Color == PlaysOrder[LastPlayerId]);
         var number = home.DeployFigurine();
-        if(number < 1 || number > 4)return;
+        if (number < 1 || number > 4) return;
         DeployedFigurines[LastPlayerId].Add(number);
         PlaceFigurine(home.HomeIndex, home.Color, number);
     }
@@ -104,10 +105,10 @@ public class ThrowsManager
                             new Figurine(color, number);
                         DeployedFigurines[Array.IndexOf(PlaysOrder, finish.Color)].Remove(number);
                         finish.AccommodatedCount++;
+                        _map[i].StandingFigurine = null;
                         CheckVictory(color, finish);
                         return;
                     }
-
                     return;
                 }
 
@@ -130,13 +131,11 @@ public class ThrowsManager
     {
         var home = _homes.Find(x => x.Color == color);
         var homeIndex = home.HomeIndex;
-        if ((i < homeIndex && futurePos > homeIndex) ||
-            (i == homeIndex && _map[homeIndex].PassedFigurines.Contains(number + 10)))
+        if ((i == homeIndex && _map[homeIndex].PassedFigurines.Contains(number + 10))||(i < homeIndex && futurePos > homeIndex)|| (homeIndex==0 && i > 0 && futurePos < i ))
         {
             rest = futurePos - homeIndex;
             return true;
         }
-
         rest = 0;
         return false;
     }

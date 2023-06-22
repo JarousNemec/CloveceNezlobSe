@@ -34,9 +34,11 @@ partial class Form1
             // 
             // _btnThrow
             // 
-            this._btnThrow.Location = new System.Drawing.Point(397, 395);
+            this._btnThrow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this._btnThrow.Location = new System.Drawing.Point(453, 971);
+            this._btnThrow.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._btnThrow.Name = "_btnThrow";
-            this._btnThrow.Size = new System.Drawing.Size(75, 53);
+            this._btnThrow.Size = new System.Drawing.Size(86, 71);
             this._btnThrow.TabIndex = 0;
             this._btnThrow.Text = "Hodit";
             this._btnThrow.UseVisualStyleBackColor = true;
@@ -44,11 +46,10 @@ partial class Form1
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(856, 857);
+            this.ClientSize = new System.Drawing.Size(978, 1055);
             this.Controls.Add(this._btnThrow);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);

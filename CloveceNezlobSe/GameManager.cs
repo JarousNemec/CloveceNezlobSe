@@ -24,12 +24,13 @@ public class GameManager
     private static readonly Point leftDownCorner = new(150, 650);
     private static readonly Point rightUpCorner = new(670, 150);
     private static readonly Point rightDownCorner = new(670, 650);
-    
+
     private Color _commonTilesColor = Color.DimGray;
 
     private ThrowsManager _throwsManager;
 
     private Form _gameForm;
+
     public GameManager(Form gameForm)
     {
         _gameForm = gameForm;
@@ -48,43 +49,42 @@ public class GameManager
         int xStart = leftUpCorner.X + TilesSpace + StandingTile.TileSize;
         int xEnd = rightUpCorner.X;
         int xSpace = (xEnd - xStart) / 7;
-
-
         _map[0] = (new StandingTile(false, Color.Yellow, leftUpCorner));
         for (int i = 1; i < 8; i++)
         {
             _map[i] = (new StandingTile(false, _commonTilesColor,
-                new Point(leftUpCorner.X, leftUpCorner.Y + i * (ySpace))));
+                new Point(leftUpCorner.X + i * xSpace, leftUpCorner.Y)));
         }
 
-        _map[8] = (new StandingTile(false, Color.Green, leftDownCorner));
+        _map[8] = (new StandingTile(false, Color.Red, rightUpCorner));
         for (int i = 9; i < 16; i++)
         {
             _map[i] = (new StandingTile(false, _commonTilesColor,
-                new Point(leftDownCorner.X + (i - 8) * xSpace, leftDownCorner.Y)));
+                new Point(rightUpCorner.X, rightUpCorner.Y + (i - 8) * (ySpace))));
         }
 
         _map[16] = (new StandingTile(false, Color.Blue, rightDownCorner));
         for (int i = 17; i < 24; i++)
         {
             _map[i] = (new StandingTile(false, _commonTilesColor,
-                new Point(rightDownCorner.X, rightDownCorner.Y - (i - 16) * (ySpace))));
+                new Point(rightDownCorner.X - (i - 16) * xSpace, rightDownCorner.Y)));
         }
 
-        _map[24] = (new StandingTile(false, Color.Red, rightUpCorner));
+        _map[24] = (new StandingTile(false, Color.Green, leftDownCorner));
         for (int i = 25; i < 32; i++)
         {
             _map[i] = (new StandingTile(false, _commonTilesColor,
-                new Point(rightUpCorner.X - (i - 24) * xSpace, rightUpCorner.Y)));
+                new Point(leftDownCorner.X, leftDownCorner.Y - (i-24) * (ySpace))));
         }
 
+
         _yellowHome = new Home(0, CreateHomeTiles(Color.Yellow, TilesSpace, TilesSpace));
-        _redHome = new Home(8,
+        _greenHome = new Home(24,
             CreateHomeTiles(Color.Green, TilesSpace, MapSize - TilesSpace - StandingTile.TileSize));
         _blueHome = new Home(16,
             CreateHomeTiles(Color.Blue, MapSize - TilesSpace - StandingTile.TileSize,
                 MapSize - TilesSpace - StandingTile.TileSize));
-        _greenHome = new Home(24,
+        _redHome = new Home(8,
             CreateHomeTiles(Color.Red, MapSize - TilesSpace - StandingTile.TileSize, TilesSpace));
         _yellowFinish = new Finish(0, CreateFinishTiles(Color.Yellow, 1, 1, xSpace, ySpace, leftUpCorner));
         _greenFinish = new Finish(8, CreateFinishTiles(Color.Green, 1, -1, xSpace, ySpace, leftDownCorner));
@@ -113,7 +113,8 @@ public class GameManager
         for (int i = 0; i < tiles.Length; i++)
         {
             tiles[i] = new StandingTile(false, color,
-                new Point((int)(StartingPoint.X + ((i + 1) * xDir * xSpace/1.3)), (int)(StartingPoint.Y + ((i + 1) * yDir * xSpace/1.3))));
+                new Point((int)(StartingPoint.X + ((i + 1) * xDir * xSpace / 1.3)),
+                    (int)(StartingPoint.Y + ((i + 1) * yDir * xSpace / 1.3))));
         }
 
         return tiles;
@@ -140,10 +141,5 @@ public class GameManager
         {
             finish.Paint(g);
         }
-        // for (int i = 0; i < 32; i++)
-        // {
-        //     g.FillEllipse(Brushes.Pink, _moves[i]._drawingPos.X, _moves[i]._drawingPos.Y,60,60);
-        //     Thread.Sleep(200);
-        // }
     }
 }
